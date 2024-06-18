@@ -89,9 +89,9 @@ namespace LINQ_лаб__14
                    from shape in page.ContentPage.Values
                    where shape is Circle
                    orderby ((Circle)shape).Radius
-                   group shape by ((Circle)shape).Radius < 100 ? "Радиус меньше 200" :
-                       ((Circle)shape).Radius >= 100 && ((Circle)shape).Radius < 300 ? "Радиус от 200 до 500" :
-                       ((Circle)shape).Radius >= 300 && ((Circle)shape).Radius < 500 ? "Радиус от 500 до 700" :
+                   group shape by ((Circle)shape).Radius < 200 ? "Радиус меньше 200" :
+                       ((Circle)shape).Radius >= 200 && ((Circle)shape).Radius < 500 ? "Радиус от 200 до 500" :
+                       ((Circle)shape).Radius >= 500 && ((Circle)shape).Radius < 700 ? "Радиус от 500 до 700" :
                        "Радиус больше 700";
         }
 
