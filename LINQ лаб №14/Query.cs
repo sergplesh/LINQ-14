@@ -14,6 +14,27 @@ namespace LINQ_лаб__14
         // 1 ЧАСТЬ
         // ------------------------------------------------------------------------------------------------------------------------------------
 
+        // ВЫБОРКА
+
+        /// <summary>
+        /// Выборка прямоугольников (LINQ-запрос)
+        /// </summary>
+        public static IEnumerable<dynamic> WhereRectangleLINQ(IEnumerable<Page> collection) //LINQ-запрос
+        {
+            return from shape in collection
+                   where shape is Rectangle
+                   select shape;
+        }
+
+        /// <summary>
+        /// Выборка прямоугольников (Методы расширения)
+        /// </summary>
+        public static IEnumerable<dynamic> WhereRectangle(IEnumerable<Page> collection) //Методы расширения
+        {
+            return collection.Where(shape => shape is Rectangle)
+                .Select(shape => shape);
+        }
+
         // НЕОТЛОЖЕННЫЕ ЗАПРОСЫ АГРЕГАЦИИ
 
         /// <summary>
@@ -35,7 +56,7 @@ namespace LINQ_лаб__14
             return pages
                 .SelectMany(page => page.ContentPage.Values)
                 .Where(shape => shape is Rectangle)
-                .Select(rectangle => ((Rectangle)rectangle).Width)
+                .Select(rectangle => ((Rectangle)rectangle).Length)
                 .Min();
         }
 
@@ -67,11 +88,11 @@ namespace LINQ_лаб__14
             return from page in pages
                    from shape in page.ContentPage.Values
                    where shape is Circle
-                   orderby ((Circle)shape).Radius  //Сортировка по радиусу
-                   group shape by ((Circle)shape).Radius < 100 ? "Радиус меньше 100" :
-                       ((Circle)shape).Radius >= 100 && ((Circle)shape).Radius < 300 ? "Радиус от 100 до 300" :
-                       ((Circle)shape).Radius >= 300 && ((Circle)shape).Radius < 500 ? "Радиус от 300 до 500" :
-                       "Радиус больше 500";
+                   orderby ((Circle)shape).Radius
+                   group shape by ((Circle)shape).Radius < 100 ? "Радиус меньше 200" :
+                       ((Circle)shape).Radius >= 100 && ((Circle)shape).Radius < 300 ? "Радиус от 200 до 500" :
+                       ((Circle)shape).Radius >= 300 && ((Circle)shape).Radius < 500 ? "Радиус от 500 до 700" :
+                       "Радиус больше 700";
         }
 
         /// <summary>
@@ -94,7 +115,7 @@ namespace LINQ_лаб__14
                    from shape in page.ContentPage.Values
                    where shape is Parallelepiped
                    let volume = ((Parallelepiped)shape).Length * ((Parallelepiped)shape).Width * ((Parallelepiped)shape).Height //Вычисление обьема
-                   select new { shape.Name, volume };
+                   select new { Name = shape.Name, Volume = volume };
         }
 
         /// <summary>
@@ -114,13 +135,13 @@ namespace LINQ_лаб__14
         public static IEnumerable<dynamic> JoinPageEntry(IEnumerable<Page> pages, IEnumerable<EntryPage> entryPage)  //LINQ-запрос, Вычисление обьема
         {
             return from page in pages
-                    join entry in entryPage on page.Number equals entry.Number
-                    select new
-                    {
-                        Name = "На странице " + "<" + page.Name + ">",,
-                        Number = " под номером " + entry.Number,
-                        Entry = " запись: " + "<" + entry.Entry + ">",
-                    };
+                   join entry in entryPage on page.Number equals entry.Number
+                   select new
+                   {
+                       Name = "На странице " + "<" + page.Name + ">",
+                       Number = " под номером " + entry.Number,
+                       Entry = " запись: " + "<" + entry.Entry + ">",
+                   };
         }
 
 
@@ -140,8 +161,8 @@ namespace LINQ_лаб__14
         public static IEnumerable<dynamic> WhereCircle(IEnumerable<Shape> collection) //LINQ-запрос
         {
             return from shape in collection
-                    where shape is Circle
-                    select shape;
+                   where shape is Circle
+                   select shape;
         }
 
         /// <summary>

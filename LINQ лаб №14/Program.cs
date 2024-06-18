@@ -14,7 +14,6 @@ namespace LINQ_лаб__14
                 Console.WriteLine("2. Часть 2");
                 Console.WriteLine("3. Закончить программу");
                 answer = EnterNumber.EnterIntNumber("Выберите часть", 0);
-
                 switch (answer)
                 {
                     case 1: // Часть 1
@@ -64,7 +63,7 @@ namespace LINQ_лаб__14
                                                 double MaxLength = Query.MaxLength(copybook);
                                                 Console.WriteLine($"\nМаксимальная длина прямоугольника: {MaxLength} (LINQ)");
                                             }
-                                            catch(Exception ex)
+                                            catch (Exception ex)
                                             {
                                                 Console.WriteLine(ex.Message);
                                             }
@@ -171,21 +170,21 @@ namespace LINQ_лаб__14
                                         }
                                     case 7:  //Выборка
                                         {
-                                            //Console.WriteLine("\nLINQ:");
-                                            //var countCircle = Query.WhereCircle(collection);
-                                            //Console.WriteLine("Круги");
-                                            //foreach (var item in countCircle)
-                                            //{
-                                            //    Console.WriteLine(item);
-                                            //}
+                                            Console.WriteLine("\nLINQ:");
+                                            var countCircle = Query.WhereRectangleLINQ(copybook);
+                                            Console.WriteLine("Прямоугольники (LINQ)");
+                                            foreach (var item in countCircle)
+                                            {
+                                                Console.WriteLine(item);
+                                            }
 
-                                            //Console.WriteLine("\nМетоды расширения:");
-                                            //var countParallelepiped = Query.WhereParallelepiped(collection);
-                                            //Console.WriteLine("Параллелепипеды");
-                                            //foreach (var item in countParallelepiped)
-                                            //{
-                                            //    Console.WriteLine(item);
-                                            //}
+                                            Console.WriteLine("\nМетоды расширения:");
+                                            var countParallelepiped = Query.WhereRectangle(copybook);
+                                            Console.WriteLine("Прямоугольники (Методы расширения)");
+                                            foreach (var item in countParallelepiped)
+                                            {
+                                                Console.WriteLine(item);
+                                            }
 
                                             break;
                                         }
@@ -234,7 +233,7 @@ namespace LINQ_лаб__14
                                 Console.WriteLine("3. Средняя высота параллелепипеда");
                                 Console.WriteLine("4. Группировка данных ");
                                 Console.WriteLine("0. Назад");
-                                answer2 = EnterNumber.EnterIntNumber("Выберите номер задания",0);
+                                answer2 = EnterNumber.EnterIntNumber("Выберите номер задания", 0);
                                 switch (answer2)
                                 {
                                     case 1: //Печать коллекции
@@ -273,7 +272,7 @@ namespace LINQ_лаб__14
                                                 double averageHeigth = Query.AverageHeigthParallelepiped(collection);
                                                 Console.WriteLine($"Средняя высота параллелепипедов: {averageHeigth}");
                                             }
-                                            catch(Exception ex)
+                                            catch (Exception ex)
                                             {
                                                 Console.WriteLine(ex.Message);
                                             }
@@ -284,7 +283,7 @@ namespace LINQ_лаб__14
                                                 double sumRadius = Query.SumCircleRadius(collection);
                                                 Console.WriteLine($"Сумма радиусов кругов: {sumRadius}");
                                             }
-                                            catch(Exception ex)
+                                            catch (Exception ex)
                                             {
                                                 Console.WriteLine(ex.Message);
                                             }
